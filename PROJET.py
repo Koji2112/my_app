@@ -9,11 +9,7 @@ import streamlit.components.v1 as components
 
 CSS = """
 <style>
-body {
-    background: linear-gradient(135deg, #0633e4 0%, #000000 100%);
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
+
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -37,30 +33,15 @@ h1 {
 .stButton > button:hover {
     background-color: #45a049;
 }
-.stRadio > label {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-}
-.stSlider > div {
-    font-size: 1rem;
-    color: #333;
-}
-.stDataframe {
-    margin-top: 30px;
-}
-html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
-}
 
-/* Style pour le label du selectbox */
+
 .stSelectbox label {
     font-size: 1.2rem;
     font-weight: bold;
     color: #4CAF50;
 }
 
-/* Style pour le dropdown */
+
 .stSelectbox div[data-baseweb="select"] {
     background-color: #f9f9f9;
     border: 2px solid #4CAF50;
@@ -70,23 +51,12 @@ html, body, [class*="css"] {
     color: #333;
 }
 
-/* Style pour les options dans le dropdown */
-.stSelectbox div[data-baseweb="menu"] {
-    background-color: #ffffff;
-    border: 2px solid #4CAF50;
-    border-radius: 8px;
-}
 
-/* Hover effect */
-.stSelectbox div[data-baseweb="select"]:hover {
-    border-color: #45a049;
-}
 
-/* Focus effect */
-.stSelectbox div[data-baseweb="select"]:focus {
-    outline: none;
-    border-color: #45a049;
-}
+
+
+
+
 </style>
 """
 
@@ -96,6 +66,19 @@ st.markdown(CSS, unsafe_allow_html=True)
 # Titre de l'application
 st.markdown("<header><h1>Application de WebScraping</h1></header>", unsafe_allow_html=True)
 
+
+# Choisir la méthode de scraping
+scraping_method = st.sidebar.selectbox(
+    "Choisissez la méthode de scraping",
+    ("BeautifulSoup", "WebScraper")
+)
+
+# Choisir le nombre de pages a scraper
+num_pages = st.sidebar.selectbox(
+    "Choisissez le nombre de pages",
+    options=list(range(1, 120)), 
+    index=2 
+)
 form_choices = ["Sélectionnez un formulaire", "Kobotoolbox", "Google Forms"]
 
 # Affichage du sélecteur
@@ -118,29 +101,13 @@ elif form_selection == "Google Forms":
         height=600,
     )
 
-else:
-    
-    st.write("Utilisez le sélecteur dans la barre latérale pour afficher un formulaire.")
-# Choisir la méthode de scraping
-scraping_method = st.sidebar.selectbox(
-    "Choisissez la méthode de scraping",
-    ("BeautifulSoup", "WebScraper")
-)
-
-# Choisir le nombre de pages a scraper
-num_pages = st.sidebar.selectbox(
-    "Choisissez le nombre de pages",
-    options=list(range(1, 120)), 
-    index=2 
-)
-
 
 st.markdown("""
 Cet application permets le webscraping de donnée a partir de site sur plusieurs pages mais
 il est egalement possible des données(non nettoyées) directement. Vous pourrez enfin telecharger
 données.
 * **Python libraries:** base64, pandas, streamlit, requests, bs4
-* **Data source:** [Les Villas](https://sn.coinafrique.com/categorie/villas?) -- [Leses terrains](https://sn.coinafrique.com/categorie/terrains?).
+* **Data source:** [Les Villas](https://sn.coinafrique.com/categorie/villas?) -- [Les terrains](https://sn.coinafrique.com/categorie/terrains?).
 """)
 
 
