@@ -93,7 +93,7 @@ st.markdown("""
 Cet application permets le webscraping de donnée a partir de site sur plusieurs pages mais
 il est egalement possible des données(non nettoyées) directement. Vous pourrez enfin telecharger
 données.
-* **Python libraries:** base64, pandas, streamlit, requests, bs4
+* **Python libraries:** pandas, streamlit, requests, bs4
 * **Data source:** [Les Villas](https://sn.coinafrique.com/categorie/villas?) -- [Les terrains](https://sn.coinafrique.com/categorie/terrains?).
 """)
 
