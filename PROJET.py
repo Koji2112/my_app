@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 from requests import get
 
 
@@ -49,13 +49,6 @@ h1 {
     font-size: 1rem;
     color: #333;
 }
-
-
-
-
-
-
-
 </style>
 """
 
@@ -118,7 +111,7 @@ def scrape_terrains_beautifulsoup(pages):
         url = f'https://sn.coinafrique.com/categorie/terrains?page={i}'
         try:
             res = get(url)
-            soup = BeautifulSoup(res.text, 'html.parser')
+            soup = bs(res.text, 'html.parser')
             containers = soup.find_all('div', class_="col s6 m4 l3")
             for container in containers:
                 img_link = container.find('img', class_="ad__card-img")['src']
@@ -132,7 +125,7 @@ def scrape_terrains_beautifulsoup(pages):
                 if url_enfant:
                     try:
                         res1 = get(url_enfant)
-                        soup1 = BeautifulSoup(res1.text, 'html.parser')
+                        soup1 = bs(res1.text, 'html.parser')
                         container_1 = soup1.find('div', class_="card round slide proffer z-depth-0 remove-background-white")
                         if container_1:
                             superficie = container_1.find('span', class_='qt').text.replace('m2', '').replace(' ', '')
@@ -171,7 +164,7 @@ def scrape_villas_beautifulsoup(pages):
         url = f'https://sn.coinafrique.com/categorie/villas?page={i}'
         try:
             res = get(url)
-            soup = BeautifulSoup(res.text, 'html.parser')
+            soup = bs(res.text, 'html.parser')
             containers = soup.find_all('div', class_="col s6 m4 l3")
             for container in containers:
                 img_link = container.find('img', class_="ad__card-img")['src']
@@ -185,7 +178,7 @@ def scrape_villas_beautifulsoup(pages):
                 if url_enfant:
                     try:
                         res1 = get(url_enfant)
-                        soup1 = BeautifulSoup(res1.text, 'html.parser')
+                        soup1 = bs(res1.text, 'html.parser')
                         container_1 = soup1.find('div', class_="card round slide proffer z-depth-0 remove-background-white")
                         if container_1:
                             type_annonce = container_1.find('h1', class_='title title-ad hide-on-large-and-down').text.split()[0]
